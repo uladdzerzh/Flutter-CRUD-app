@@ -2,16 +2,18 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Yego Form',
       initialRoute: '/',
       routes: {
-        '/': (context) => YegoForm(),
+        '/': (context) => const YegoForm(),
         '/saved_data': (context) => SavedDataScreen(),
       },
     );
@@ -19,6 +21,8 @@ class MyApp extends StatelessWidget {
 }
 
 class YegoForm extends StatefulWidget {
+  const YegoForm({super.key});
+
   @override
   _YegoFormState createState() => _YegoFormState();
 }
@@ -69,7 +73,7 @@ class _YegoFormState extends State<YegoForm> {
 
   Future<void> _getImage() async {
     final pickedFile =
-        await ImagePicker().getImage(source: ImageSource.gallery);
+        await ImagePicker().pickImage(source: ImageSource.gallery);
     setState(() {
       _image = pickedFile != null ? File(pickedFile.path) : null;
     });
@@ -79,9 +83,9 @@ class _YegoFormState extends State<YegoForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text('Yego Form')),
+          title: const Text('Yego Form')),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
           child: Column(
@@ -95,21 +99,21 @@ class _YegoFormState extends State<YegoForm> {
                       backgroundImage:
                           _image != null ? FileImage(_image!) : null,
                       child: _image == null
-                          ? Icon(Icons.person, size: 50.0)
+                          ? const Icon(Icons.person, size: 50.0)
                           : null,
                     ),
                     Positioned(
                       bottom: 0.0,
                       right: 0.0,
                       child: Container(
-                        padding: EdgeInsets.all(4.0),
+                        padding: const EdgeInsets.all(4.0),
                         decoration: BoxDecoration(
                           color: Colors.black54,
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         child: Text(
                           _level.toInt().toString(),
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                         ),
                       ),
                     ),
@@ -117,7 +121,7 @@ class _YegoFormState extends State<YegoForm> {
                 ),
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Name'),
+                decoration: const InputDecoration(labelText: 'Name'),
                 validator: _validateName,
                 onSaved: (value) {
                   setState(() {
@@ -126,7 +130,7 @@ class _YegoFormState extends State<YegoForm> {
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Surname'),
+                decoration: const InputDecoration(labelText: 'Surname'),
                 validator: _validateSurname,
                 onSaved: (value) {
                   setState(() {
@@ -146,13 +150,13 @@ class _YegoFormState extends State<YegoForm> {
                   });
                 },
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: () {
                   _formKey.currentState!.save();
                   _saveForm();
                 },
-                child: Text('Save'),
+                child: const Text('Save'),
               ),
             ],
           ),
@@ -163,6 +167,8 @@ class _YegoFormState extends State<YegoForm> {
 }
 
 class SavedDataScreen extends StatelessWidget {
+  const SavedDataScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final Map<String, dynamic> arguments =
@@ -175,7 +181,7 @@ class SavedDataScreen extends StatelessWidget {
     return MaterialApp(
       title: 'Saved data',
       home: Scaffold(
-        appBar: AppBar(title: Text('Saved Data')),
+        appBar: AppBar(title: const Text('Saved Data')),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -190,38 +196,38 @@ class SavedDataScreen extends StatelessWidget {
                       radius: 100.0,
                       backgroundImage: image != null ? FileImage(image) : null,
                       child:
-                          image == null ? Icon(Icons.person, size: 50.0) : null,
+                          image == null ? const Icon(Icons.person, size: 50.0) : null,
                     ),
                     Positioned(
                       bottom: 0.0,
                       right: 0.0,
                       child: Container(
-                        padding: EdgeInsets.all(4.0),
+                        padding: const EdgeInsets.all(4.0),
                         decoration: BoxDecoration(
                           color: Colors.black54,
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         child: Text(
                           level.toInt().toString(),
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                         ),
                       ),
                     ),
                   ],
                 ),
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               Text('Name: $name'),
-              SizedBox(height: 8.0),
+              const SizedBox(height: 8.0),
               Text('Surname: $surname'),
-              SizedBox(height: 8.0),
+              const SizedBox(height: 8.0),
               Text('Level: ${level.toInt()}'),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text('Edit Data'),
+                child: const Text('Edit Data'),
               ),
             ],
           ),
