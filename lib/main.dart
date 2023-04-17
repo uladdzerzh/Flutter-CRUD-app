@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Yego Form',
+      title: 'Uladzislau Dzerzhanovich',
       initialRoute: '/',
       routes: {
         '/': (context) => const YegoForm(),
