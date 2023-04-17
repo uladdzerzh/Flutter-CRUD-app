@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Uladzislau Dzerzhanovich',
+      title: 'Yego Form',
       initialRoute: '/',
       routes: {
         '/': (context) => const YegoForm(),
@@ -56,6 +56,15 @@ class _YegoFormState extends State<YegoForm> {
     return null;
   }
 
+  void _showSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: const Duration(seconds: 2),
+      ),
+    );
+  }
+
   void _saveForm() {
     if (_formKey.currentState!.validate()) {
       Navigator.pushNamed(
@@ -68,6 +77,9 @@ class _YegoFormState extends State<YegoForm> {
           'image': _image,
         },
       );
+    } else {
+      _formKey.currentState!.validate();
+      _showSnackBar(context, 'Please correct the errors in the form');
     }
   }
 
@@ -82,8 +94,7 @@ class _YegoFormState extends State<YegoForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          title: const Text('Yego Form')),
+      appBar: AppBar(title: const Text('Yego Form')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -195,8 +206,9 @@ class SavedDataScreen extends StatelessWidget {
                     CircleAvatar(
                       radius: 100.0,
                       backgroundImage: image != null ? FileImage(image) : null,
-                      child:
-                          image == null ? const Icon(Icons.person, size: 50.0) : null,
+                      child: image == null
+                          ? const Icon(Icons.person, size: 50.0)
+                          : null,
                     ),
                     Positioned(
                       bottom: 0.0,
