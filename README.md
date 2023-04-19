@@ -1,4 +1,4 @@
-# lab3
+# Flutter-CRUD-app
 
 A new Flutter project.
 
